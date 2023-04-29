@@ -2,60 +2,54 @@ import * as yup from "yup";
 
 export const childValidation = yup
   .object({
-    product: yup
+    productCategory: yup
       .object()
       .required()
       .transform((value) => (Array.isArray(value) || !value ? null : value)),
-    sell_price: yup
+    name: yup
+      .string()
+      .transform((value) => (Array.isArray(value) ? null : value))
+      .required(),
+    buy_price: yup
       .number()
-      .required()
-      .test(
-        "len",
-        "Sell Price max 15 digits",
-        (val) => val.toString().length <= 15
+      .nullable()
+      .test("len", "Sell Price max 15 digits", (val) =>
+        val ? val.toString().length <= 15 : true
       )
       .transform((value) => (Number.isNaN(value) ? null : value)),
   })
   .required();
 
-export const validation = yup
+export const createValidation = yup
   .object({
-    date: yup.date().required(),
-    customer: yup
+    supplier: yup
       .object()
       .required()
       .transform((value) => (Array.isArray(value) ? null : value)),
-    receipt_number: yup
+    items: yup.array().of(childValidation).required().min(1),
+  })
+  .required();
+
+export const editValidation = yup
+  .object({
+    supplier: yup
+      .object()
+      .required()
+      .transform((value) => (Array.isArray(value) ? null : value)),
+    productCategory: yup
+      .object()
+      .required()
+      .transform((value) => (Array.isArray(value) || !value ? null : value)),
+    name: yup
       .string()
       .transform((value) => (Array.isArray(value) ? null : value))
-      .nullable(),
-    checkout_amount: yup
+      .required(),
+    buy_price: yup
       .number()
-      .required()
-      .test(
-        "len",
-        "Checkout Amount max 15 digits",
-        (val) => val.toString().length <= 15
+      .nullable()
+      .test("len", "Sell Price max 15 digits", (val) =>
+        val ? val.toString().length <= 15 : true
       )
       .transform((value) => (Number.isNaN(value) ? null : value)),
-    paymentMethod: yup
-      .object()
-      .nullable()
-      .transform((value) => (Array.isArray(value) ? null : value)),
-    pay_amount: yup
-      .number()
-      .typeError("Pay Amount must be a number")
-      .nullable()
-      .test(
-        "len",
-        "Pay Amount max 15 digits",
-        (val) => val.toString().length <= 15
-      )
-      .transform((_, val) => (val !== "" ? Number(val) : null)),
-    pay_refund: yup
-      .bool()
-      // .oneOf([true], "You must accept the terms and conditions")
-      .transform((value) => (Array.isArray(value) ? false : value)),
-    items: yup.array().of(childValidation).required().min(1),
   })
   .required();

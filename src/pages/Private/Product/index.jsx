@@ -1,5 +1,12 @@
 import Datatable from "@datatable";
-import { columns, details, createFields, editFields, validation } from "./inc";
+import {
+  columns,
+  details,
+  createFields,
+  editFields,
+  createValidation,
+  editValidation,
+} from "./inc";
 
 const Product = (props) => {
   const { name } = props;
@@ -8,8 +15,8 @@ const Product = (props) => {
     <Datatable
       title={name}
       columns={columns}
-      createValidation={validation}
-      editValidation={validation}
+      createValidation={createValidation}
+      editValidation={editValidation}
       details={details} // Optional if customize details columns
       createFields={createFields} // Optional if customize create fields
       editFields={editFields} // Optional if customize edit fields
