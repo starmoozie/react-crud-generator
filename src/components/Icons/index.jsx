@@ -9,11 +9,13 @@ import DownloadIcon from "@mui/icons-material/Download";
 import UploadIcon from "@mui/icons-material/Upload";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import CategoryIcon from "@mui/icons-material/Category";
+import PaymentIcon from "@mui/icons-material/Payment";
 
 export const Dashboard = (props) => <DashboardIcon {...props} />;
 export const Supplier = (props) => <PeopleOutlineIcon {...props} />;
 export const Customer = (props) => <PeopleOutlineIcon {...props} />;
 export const ProductCategory = (props) => <CategoryIcon {...props} />;
+export const PaymentMethod = (props) => <PaymentIcon {...props} />;
 export const Create = (props) => <AddBoxIcon {...props} />;
 export const Save = (props) => <SaveIcon {...props} />;
 export const Edit = (props) => <EditIcon {...props} />;

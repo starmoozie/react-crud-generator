@@ -171,6 +171,54 @@ export const PRIVATE_MENU = [
     children: [],
   },
   {
+    id: 8,
+    name: "Payment Method",
+    path: "/payment-methods",
+    permission: [
+      {
+        position: "top-left",
+        access: [
+          {
+            name: "create",
+            method: "post",
+          },
+        ],
+      },
+      {
+        position: "top-right",
+        access: [
+          {
+            name: "Export",
+          },
+          // {
+          //   name: "Import",
+          // },
+        ],
+      },
+      {
+        position: "line",
+        access: [
+          {
+            name: "Detail",
+            modalType: "DefaultModal",
+            method: null,
+          },
+          {
+            name: "Edit",
+            modalType: "FormModal",
+            method: "put",
+          },
+          {
+            name: "Delete",
+            modalType: "ConfirmModal",
+            method: "delete",
+          },
+        ],
+      },
+    ],
+    children: [],
+  },
+  {
     id: 5,
     name: "Sale",
     path: "/sales",
