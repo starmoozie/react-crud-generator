@@ -10,6 +10,7 @@ import UploadIcon from "@mui/icons-material/Upload";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 
 export const Dashboard = (props) => <DashboardIcon {...props} />;
+export const Supplier = (props) => <PeopleOutlineIcon {...props} />;
 export const Customer = (props) => <PeopleOutlineIcon {...props} />;
 export const Create = (props) => <AddBoxIcon {...props} />;
 export const Save = (props) => <SaveIcon {...props} />;

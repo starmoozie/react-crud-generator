@@ -27,6 +27,54 @@ export const DASHBOARD_MENU = [
 
 export const PRIVATE_MENU = [
   {
+    id: 6,
+    name: "Supplier",
+    path: "/suppliers",
+    permission: [
+      {
+        position: "top-left",
+        access: [
+          {
+            name: "create",
+            method: "post",
+          },
+        ],
+      },
+      {
+        position: "top-right",
+        access: [
+          {
+            name: "Export",
+          },
+          // {
+          //   name: "Import",
+          // },
+        ],
+      },
+      {
+        position: "line",
+        access: [
+          {
+            name: "Detail",
+            modalType: "DefaultModal",
+            method: null,
+          },
+          {
+            name: "Edit",
+            modalType: "FormModal",
+            method: "put",
+          },
+          {
+            name: "Delete",
+            modalType: "ConfirmModal",
+            method: "delete",
+          },
+        ],
+      },
+    ],
+    children: [],
+  },
+  {
     id: 4,
     name: "Customer",
     path: "/customers",
