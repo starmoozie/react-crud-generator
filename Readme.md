@@ -25,7 +25,7 @@ Standard CRUD Generator ReactJS with validation.
 
 #### Menu based Permissions
 
-- [menu permissions](/constants/menu.js)
+- [menu permissions](https://github.com/starmoozie/react-crud-generator/blob/main/src/constants/menu.js)
 
 #### Packages
 
