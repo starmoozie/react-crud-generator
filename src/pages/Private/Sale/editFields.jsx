@@ -1,7 +1,4 @@
-import DateField from "../../../components/Fields/Date";
-import TextField from "@field/Text";
-import SelectField from "../../../components/Fields/Select";
-import { CheckboxField } from "@field";
+import { DateField, CheckboxField, TextField, SelectField } from "@field";
 
 export const editFields = [
   {

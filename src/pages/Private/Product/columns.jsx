@@ -3,13 +3,13 @@ import { rupiah } from "@util";
 export const columns = [
   {
     accessorKey: "supplier.name",
+    accessor: "supplier.name",
     header: "Supplier",
-    Cell: ({ row }) => <>{row.original.supplier?.name}</>,
   },
   {
     accessorKey: "productCategory.name",
+    accessor: "productCategory.name",
     header: "Category",
-    Cell: ({ row }) => <>{row.original.productCategory?.name}</>,
   },
   {
     accessorKey: "name",

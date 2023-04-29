@@ -12,7 +12,7 @@ const DELAY = 500;
 const getUrl = (endpoint) => `${import.meta.env.VITE_API_URL}${endpoint}`;
 const getFilter = (filter) => `filters=${JSON.stringify(filter || [])}`;
 
-export default function SelectField(props) {
+export const SelectField = (props) => {
   const [cookies] = useCookies();
   const {
     control,
@@ -162,4 +162,6 @@ export default function SelectField(props) {
       }}
     />
   );
-}
+};
+
+export default SelectField;

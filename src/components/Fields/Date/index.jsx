@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import dayjs from "dayjs";
 import { handleClientValidationMessage } from "@util";
 
-export default function DateField({
+export const DateField = ({
   autoFocus,
   accessorKey,
   header,
@@ -16,7 +16,7 @@ export default function DateField({
   setValue,
   parent,
   index,
-}) {
+}) => {
   useEffect(() => {
     setValue(accessorKey, defaultValue);
   }, [defaultValue]);
@@ -59,4 +59,6 @@ export default function DateField({
       />
     </LocalizationProvider>
   );
-}
+};
+
+export default DateField;

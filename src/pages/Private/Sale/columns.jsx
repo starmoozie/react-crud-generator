@@ -53,8 +53,8 @@ export const columns = [
   },
   {
     accessorKey: "customer.name",
+    accessor: "customer.name",
     header: "Customer",
-    Cell: ({ row }) => <>{row.original.customer?.name}</>,
   },
   {
     accessorKey: "items",
