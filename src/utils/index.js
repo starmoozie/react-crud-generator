@@ -141,3 +141,6 @@ export const handleClientValidationMessage = (
     message: message,
   };
 };
+
+export const getNestedObjectValue = (object, key) =>
+  key.split(".").reduce((prev, cur) => prev[cur], object);

@@ -5,6 +5,7 @@ import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import { useDispatch } from "react-redux";
 import { handleCloseModal } from "@reducer/modalReducer";
+import { getNestedObjectValue } from "@util";
 
 export const DefaultModal = ({ columns, row }) => {
   const dispatch = useDispatch();
@@ -44,7 +45,9 @@ export const DefaultModal = ({ columns, row }) => {
                     gutterBottom
                     key={`${Math.random().toString(36).slice(2, 7)}`}
                   >
-                    {row[accessorKey]}
+                    {accessorKey.includes(".")
+                      ? getNestedObjectValue(row, accessorKey)
+                      : row[accessorKey]}
                   </Typography>
                 )}
               </Grid>
