@@ -31,7 +31,6 @@ const editFields = [
 const editValidation = yup
   .object({
     name: yup.string().required().max(50),
-    phone: yup.string().nullable().max(15),
   })
   .required();
 
