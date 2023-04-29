@@ -52,9 +52,9 @@ export const columns = [
     },
   },
   {
-    accessorKey: "customer",
+    accessorKey: "customer.name",
     header: "Customer",
-    Cell: ({ cell }) => <>{cell.getValue()?.name}</>,
+    Cell: ({ row }) => <>{row.original.customer?.name}</>,
   },
   {
     accessorKey: "items",
