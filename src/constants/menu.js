@@ -219,7 +219,7 @@ export const PRIVATE_MENU = [
     children: [],
   },
   {
-    id: 7,
+    id: 9,
     name: "Product",
     path: "/products",
     permission: [
