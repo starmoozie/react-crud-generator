@@ -2,8 +2,8 @@ import { rupiah } from "@util";
 
 export const columns = [
   {
-    accessorKey: "customer.name",
-    header: "Customer",
+    accessorKey: "supplier.name",
+    header: "Supplier",
     Cell: ({ row }) => <>{row.original.supplier?.name}</>,
   },
   {
