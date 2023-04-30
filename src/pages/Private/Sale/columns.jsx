@@ -79,12 +79,6 @@ export const columns = [
     },
   },
   {
-    accessorKey: "totalAmount",
-    header: "Total Amount",
-    enableColumnFilter: false,
-    Cell: ({ cell }) => <>{rupiah(cell.getValue())}</>,
-  },
-  {
     accessorKey: "alreadyPaid",
     header: "Already Paid",
     enableColumnFilter: false,
@@ -103,16 +97,28 @@ export const columns = [
     },
   },
   {
-    accessorKey: "unpaid",
-    header: "Unpaid",
-    filterVariant: "checkbox",
-    Cell: ({ row }) => <>{rupiah(row.original.unpaid)}</>,
+    accessorKey: "totalAmount",
+    header: "Total Amount",
+    enableColumnFilter: false,
+    Cell: ({ cell }) => <>{rupiah(cell.getValue())}</>,
   },
   {
     accessorKey: "refund",
     header: "Refund",
     filterVariant: "checkbox",
-    Cell: ({ cell }) => <>{rupiah(cell.getValue())}</>,
+    Cell: ({ row }) => {
+      const entry = row.original;
+
+      return (
+        <>
+          {entry.refund_payabled ? (
+            <s>{rupiah(entry.refund)}</s>
+          ) : (
+            rupiah(entry.refund)
+          )}
+        </>
+      );
+    },
   },
   {
     accessorKey: "netto",

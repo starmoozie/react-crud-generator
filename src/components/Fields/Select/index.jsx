@@ -10,7 +10,7 @@ import { handleClientValidationMessage } from "@util";
 
 const DELAY = 500;
 const getUrl = (endpoint) => `${import.meta.env.VITE_API_URL}${endpoint}`;
-const getFilter = (filter) => `filters=${JSON.stringify(filter || [])}`;
+const getFilter = (filter) => `filters=${JSON.stringify(filter)}`;
 
 export const SelectField = (props) => {
   const [cookies] = useCookies();
@@ -27,11 +27,13 @@ export const SelectField = (props) => {
     primaryKey,
     parent,
     index,
+    filters,
   } = props;
 
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [options, setOptions] = useState([]);
+  const [defaultFilters, _] = useState(filters || []);
 
   useEffect(() => {
     setValue(accessorKey, defaultValue || null);
@@ -55,7 +57,7 @@ export const SelectField = (props) => {
     setLoading(true);
 
     setTimeout(() => {
-      fetchData();
+      fetchData(defaultFilters);
     }, DELAY);
   };
 
@@ -67,7 +69,7 @@ export const SelectField = (props) => {
   const debounced = useDebouncedCallback((value) => {
     const column = attribute.split("-");
 
-    fetchData([{ id: column[0], value: value }]);
+    fetchData([...defaultFilters, ...[{ id: column[0], value: value }]]);
   }, DELAY);
 
   return (

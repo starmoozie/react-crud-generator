@@ -1,4 +1,6 @@
 import { DateField, CheckboxField, TextField, SelectField } from "@field";
+import { rupiah } from "@util";
+import Chip from "@mui/material/Chip";
 
 export const editFields = [
   {
@@ -71,10 +73,26 @@ export const editFields = [
   {
     accessorKey: "refund_payabled",
     header: "Pay Refund",
-    Cell: (props) => (
-      // <>{console.log(props.row?.refund_payable)}</>
-      <CheckboxField {...props} defaultValue={props.row.refund_payabled} />
-    ),
+    Cell: (props) => {
+      const entry = props.row;
+      const isDisabled = entry.refund > 0 ? false : true;
+      const label = entry.refund_payabled ? (
+        <s>{rupiah(entry.refund)}</s>
+      ) : (
+        rupiah(entry.refund)
+      );
+
+      return (
+        <>
+          <CheckboxField
+            {...props}
+            defaultValue={entry.refund_payabled}
+            isDisabled={isDisabled}
+          />
+          <Chip label={label} color="info" size="small" />
+        </>
+      );
+    },
   },
   {
     accessorKey: "items",
@@ -91,6 +109,12 @@ export const editFields = [
           <SelectField
             {...props}
             endpoint="/products"
+            filters={[
+              {
+                id: "is_sold",
+                value: "false",
+              },
+            ]}
             primaryKey="id"
             attribute="code"
             defaultValue={props.row?.items[props.index]?.product || ""}

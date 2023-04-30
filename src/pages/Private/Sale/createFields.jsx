@@ -90,6 +90,12 @@ export const createFields = [
           <SelectField
             {...props}
             endpoint="/products"
+            filters={[
+              {
+                id: "is_sold",
+                value: "false",
+              },
+            ]}
             primaryKey="id"
             attribute="code"
             defaultValue={props.row?.items[props.index]?.product || ""}

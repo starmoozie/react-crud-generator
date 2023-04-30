@@ -10,10 +10,8 @@ export const childValidation = yup
       .number()
       .typeError("Sell Price must be a number")
       .nullable()
-      .test(
-        "len",
-        "Pay Amount max 15 digits",
-        (val) => val.toString().length <= 15
+      .test("len", "Pay Amount max 15 digits", (val) =>
+        val ? val.toString().length <= 15 : true
       )
       .transform((_, val) => (val !== "" ? Number(val) : null)),
   })
@@ -29,9 +27,10 @@ export const validation = yup
     receipt_number: yup
       .string()
       .transform((value) => (Array.isArray(value) ? null : value))
-      .nullable(),
+      .required(),
     checkout_amount: yup
       .number()
+      .typeError("Sell Price must be a number")
       .required()
       .test(
         "len",
@@ -41,18 +40,17 @@ export const validation = yup
       .transform((value) => (Number.isNaN(value) ? null : value)),
     paymentMethod: yup
       .object()
-      .nullable()
+      .required()
       .transform((value) => (Array.isArray(value) ? null : value)),
     pay_amount: yup
       .number()
-      .typeError("Pay Amount must be a number")
-      .nullable()
+      .required()
       .test(
         "len",
-        "Pay Amount max 15 digits",
+        "Checkout Amount max 15 digits",
         (val) => val.toString().length <= 15
       )
-      .transform((_, val) => (val !== "" ? Number(val) : null)),
+      .transform((value) => (Number.isNaN(value) ? null : value)),
     refund_payabled: yup
       .bool()
       // .oneOf([true], "You must accept the terms and conditions")

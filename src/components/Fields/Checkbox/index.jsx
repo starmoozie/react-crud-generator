@@ -17,6 +17,7 @@ export const CheckboxField = ({
   setValue,
   parent,
   index,
+  isDisabled,
 }) => {
   useEffect(() => {
     setValue(accessorKey, defaultValue);
@@ -41,6 +42,7 @@ export const CheckboxField = ({
               control={<Checkbox {...field} {...label} autoFocus={autoFocus} />}
               label={header}
               checked={field.value ? true : false}
+              disabled={isDisabled || false}
             />
             {error.isError ? (
               <FormHelperText error={error.isError}>
