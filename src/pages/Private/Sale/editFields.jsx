@@ -69,6 +69,24 @@ export const editFields = [
       xs: 12,
       md: 4,
     },
+    Cell: (props) => {
+      const unpaid = props.row?.unpaid;
+
+      return (
+        <>
+          <TextField {...props} />
+          {parseInt(unpaid) ? (
+            <Chip
+              size="small"
+              label={`Unpaid: ${rupiah(unpaid)}`}
+              color="warning"
+            />
+          ) : (
+            <></>
+          )}
+        </>
+      );
+    },
   },
   {
     accessorKey: "refund_payabled",
