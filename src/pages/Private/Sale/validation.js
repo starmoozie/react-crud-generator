@@ -8,13 +8,14 @@ export const childValidation = yup
       .transform((value) => (Array.isArray(value) || !value ? null : value)),
     sell_price: yup
       .number()
-      .required()
+      .typeError("Sell Price must be a number")
+      .nullable()
       .test(
         "len",
-        "Sell Price max 15 digits",
+        "Pay Amount max 15 digits",
         (val) => val.toString().length <= 15
       )
-      .transform((value) => (Number.isNaN(value) ? null : value)),
+      .transform((_, val) => (val !== "" ? Number(val) : null)),
   })
   .required();
 
@@ -52,7 +53,7 @@ export const validation = yup
         (val) => val.toString().length <= 15
       )
       .transform((_, val) => (val !== "" ? Number(val) : null)),
-    pay_refund: yup
+    refund_payabled: yup
       .bool()
       // .oneOf([true], "You must accept the terms and conditions")
       .transform((value) => (Array.isArray(value) ? false : value)),

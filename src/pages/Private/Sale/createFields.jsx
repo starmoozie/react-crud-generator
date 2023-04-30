@@ -71,7 +71,7 @@ export const createFields = [
     },
   },
   {
-    accessorKey: "pay_refund",
+    accessorKey: "refund_payabled",
     header: "Pay Refund",
     Cell: (props) => <CheckboxField {...props} />,
   },

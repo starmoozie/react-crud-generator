@@ -1,14 +1,14 @@
 export const AUTH_MENU = [
   {
     id: 1,
-    name: "login",
+    name: "Login",
     path: "/login",
     permission: [],
     children: [],
   },
   {
     id: 2,
-    name: "register",
+    name: "Register",
     path: "/register",
     permission: [],
     children: [],

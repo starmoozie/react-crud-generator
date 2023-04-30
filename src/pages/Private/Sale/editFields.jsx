@@ -69,9 +69,12 @@ export const editFields = [
     },
   },
   {
-    accessorKey: "pay_refund",
+    accessorKey: "refund_payabled",
     header: "Pay Refund",
-    Cell: (props) => <CheckboxField {...props} />,
+    Cell: (props) => (
+      // <>{console.log(props.row?.refund_payable)}</>
+      <CheckboxField {...props} defaultValue={props.row.refund_payabled} />
+    ),
   },
   {
     accessorKey: "items",

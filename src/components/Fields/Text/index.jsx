@@ -13,6 +13,7 @@ export const TextField = ({
   setValue,
   parent,
   index,
+  type,
 }) => {
   useEffect(() => {
     setValue(accessorKey, defaultValue);
@@ -34,6 +35,7 @@ export const TextField = ({
         return (
           <Text
             {...field}
+            type={type || "text"}
             margin="dense"
             variant="standard"
             value={field.value || ""}

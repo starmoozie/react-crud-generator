@@ -1,19 +1,19 @@
-import { Outlet } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { useEffect } from "react";
-
-// List Menu
-import { DASHBOARD_MENU, PRIVATE_MENU } from "@constant";
-import { setPrivateMenu } from "@reducer/sidebarReducer";
+import { useLocation, Navigate, Outlet } from "react-router-dom";
+import { useAuth } from "@hook";
 
 const PrivateRoute = () => {
-  const dispatch = useDispatch();
+  const { cookies } = useAuth();
+  const location = useLocation();
 
-  useEffect(() => {
-    dispatch(setPrivateMenu([...DASHBOARD_MENU, ...PRIVATE_MENU]));
-  });
-
-  return <Outlet />;
+  return (
+    <>
+      {cookies.profile?.token ? (
+        <Outlet />
+      ) : (
+        <Navigate to="/login" state={{ from: location }} />
+      )}
+    </>
+  );
 };
 
 export default PrivateRoute;

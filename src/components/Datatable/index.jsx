@@ -11,7 +11,8 @@ import LineButton from "@button/Line";
 import TopButton from "@button/Top";
 import { useSelector } from "react-redux";
 import { TOP_LEFT, TOP_RIGHT, LINE } from "@constant";
-import { defaultFetch } from "@util";
+import { setFetchUrl, fetchApi } from "@util";
+import { useCookies } from "react-cookie";
 
 const Datatable = ({
   title,
@@ -23,6 +24,7 @@ const Datatable = ({
   editValidation,
 }) => {
   const location = useLocation();
+  const [cookies] = useCookies();
 
   const [columnFilters, setColumnFilters] = useState([]);
   const [sorting, setSorting] = useState([]);
@@ -72,13 +74,17 @@ const Datatable = ({
         sorting,
       ],
       queryFn: async () => {
-        return await defaultFetch(
-          location.pathname,
-          columnFilters,
-          pagination.pageIndex,
-          pagination.pageSize,
-          sorting
-        );
+        return await fetchApi({
+          token: cookies.profile?.token,
+          url: setFetchUrl(location.pathname),
+          method: "GET",
+          query: {
+            page: pagination.pageIndex + 1,
+            per_page: pagination.pageSize,
+            filters: JSON.stringify(columnFilters),
+            sort: JSON.stringify(sorting),
+          },
+        });
       },
       keepPreviousData: true,
     }

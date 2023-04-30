@@ -40,6 +40,7 @@ export const CheckboxField = ({
             <FormControlLabel
               control={<Checkbox {...field} {...label} autoFocus={autoFocus} />}
               label={header}
+              checked={field.value ? true : false}
             />
             {error.isError ? (
               <FormHelperText error={error.isError}>
