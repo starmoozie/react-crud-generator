@@ -187,6 +187,7 @@ const Datatable = ({
           }
         }
         enableStickyHeader
+        enableStickyFooter
         muiTableContainerProps={{ sx: { maxHeight: 610 } }}
         columnVisibility={visibilityColumns}
         onColumnVisibilityChange={setVisibilityColumns}
