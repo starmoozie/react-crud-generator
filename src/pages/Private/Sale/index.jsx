@@ -36,8 +36,6 @@ const Sale = (props) => {
           },
         ];
 
-        console.log(values);
-
         return (
           <Box sx={{ pl: 1 }}>
             {values.map((value, index) => (
