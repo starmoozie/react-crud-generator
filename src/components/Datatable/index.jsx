@@ -193,8 +193,10 @@ const Datatable = ({
         columnVisibility={visibilityColumns}
         onColumnVisibilityChange={setVisibilityColumns}
         renderBottomToolbarCustomActions={({ table }) =>
-          BottomToolbar && (
+          BottomToolbar ? (
             <BottomToolbar table={table} data={data?.data ?? []} />
+          ) : (
+            <Box />
           )
         }
       />
