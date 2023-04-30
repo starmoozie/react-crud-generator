@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import MaterialReactTable, {
   MRT_ShowHideColumnsButton,
 } from "material-react-table";
-import { Typography, Box } from "@mui/material";
+import { Typography, Box, Button } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import { useLocation } from "react-router-dom";
 import Modal from "@modal";
@@ -22,6 +22,7 @@ const Datatable = ({
   editFields,
   createValidation,
   editValidation,
+  BottomToolbar,
 }) => {
   const location = useLocation();
   const [cookies] = useCookies();
@@ -191,6 +192,11 @@ const Datatable = ({
         muiTableContainerProps={{ sx: { maxHeight: 610 } }}
         columnVisibility={visibilityColumns}
         onColumnVisibilityChange={setVisibilityColumns}
+        renderBottomToolbarCustomActions={({ table }) =>
+          BottomToolbar && (
+            <BottomToolbar table={table} data={data?.data ?? []} />
+          )
+        }
       />
 
       {/* Modal component */}
