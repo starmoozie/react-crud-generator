@@ -20,7 +20,7 @@ const Sidebar = () => {
       <Toolbar />
       <List>
         {menu.map((item) => {
-          return item.children.length ? (
+          return item.children?.length ? (
             <></>
           ) : (
             <SingleItem key={item.id} item={item} />

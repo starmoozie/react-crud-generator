@@ -1,4 +1,3 @@
-import { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 
 // Private Components
@@ -6,15 +5,18 @@ import PrivateRoute from "@route/Private";
 import PrivateLayout from "@layout/Private";
 
 // List Menu
-import { DASHBOARD_MENU, PRIVATE_MENU, AUTH_MENU } from "@constant";
+import { DASHBOARD_MENU, AUTH_MENU } from "@constant";
 
 // Configuration
 import { PRIVATE_PAGE, AUTH_PAGE } from "@config";
 import loadable from "@loadable/component";
 import AuthRoute from "./Public/Auth";
 import AuthLayout from "../components/Layouts/Public/Auth";
+import { useSelector } from "react-redux";
 
 const Router = () => {
+  const menu = useSelector((state) => state.sidebarReducer.privateMenu);
+
   return (
     <Routes>
       <Route element={<AuthRoute />}>
@@ -30,7 +32,7 @@ const Router = () => {
       </Route>
       <Route element={<PrivateRoute />}>
         <Route element={<PrivateLayout />}>
-          {[...DASHBOARD_MENU, ...PRIVATE_MENU].map((item, index) => (
+          {[...DASHBOARD_MENU, ...menu].map((item, index) => (
             <Route
               key={index}
               path={item.path}
