@@ -3,7 +3,7 @@ import TooltipColumn from "@column/Tooltip";
 import DateFilter from "@filter/Date";
 import dayjs from "dayjs";
 import { useState } from "react";
-import { Box } from "@mui/material";
+import { Box, Chip, Tooltip } from "@mui/material";
 
 export const columns = [
   {
@@ -108,15 +108,25 @@ export const columns = [
     filterVariant: "checkbox",
     Cell: ({ row }) => {
       const entry = row.original;
+      const color =
+        parseInt(entry.refund) && !entry.refund_payabled
+          ? "success"
+          : "default";
+
+      const label =
+        entry.refund_payabled || !parseInt(entry.refund) ? "No" : "Yes";
+
+      const title =
+        entry.refund_payabled || !parseInt(entry.refund) ? (
+          <s>{rupiah(row.original.refund)}</s>
+        ) : (
+          rupiah(row.original.refund)
+        );
 
       return (
-        <>
-          {entry.refund_payabled ? (
-            <s>{rupiah(entry.refund)}</s>
-          ) : (
-            rupiah(entry.refund)
-          )}
-        </>
+        <Tooltip title={title}>
+          <Chip color={color} label={label} size="small" />
+        </Tooltip>
       );
     },
   },
