@@ -50,6 +50,9 @@ export const columns = [
         </Box>
       );
     },
+    Cell: ({ cell }) => (
+      <>{dayjs(cell.getValue()).format("dddd, MMMM D, YYYY")}</>
+    ),
   },
   {
     accessorKey: "customer.name",
