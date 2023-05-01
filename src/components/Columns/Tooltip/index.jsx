@@ -1,11 +1,9 @@
-import { Tooltip, Typography, Button } from "@mui/material";
+import { Tooltip, Chip } from "@mui/material";
 
 const TooltipColumn = ({ title, value }) => {
   return (
     <Tooltip arrow title={title}>
-      <Typography>
-        <Button>{value}</Button>
-      </Typography>
+      <Chip label={value} size="small" />
     </Tooltip>
   );
 };
