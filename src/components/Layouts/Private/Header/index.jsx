@@ -5,6 +5,7 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
+import Stack from "@mui/material/Stack";
 
 // Other Libraries
 import { useDispatch, useSelector } from "react-redux";
@@ -13,6 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setMobileOpen } from "@reducer/sidebarReducer";
 
 import Profile from "./Profile";
+import ThemeSwitcher from "./ThemeSwitcher";
 
 const Header = () => {
   const mobileOpen = useSelector((state) => state.sidebarReducer.mobileOpen);
@@ -50,7 +52,10 @@ const Header = () => {
         <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
           {import.meta.env.VITE_APP_NAME}
         </Typography>
-        <Profile />
+        <Stack spacing={2} direction="row">
+          <ThemeSwitcher />
+          <Profile />
+        </Stack>
       </Toolbar>
       <Divider />
     </AppBar>
