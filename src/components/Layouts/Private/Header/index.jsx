@@ -12,6 +12,8 @@ import { useDispatch, useSelector } from "react-redux";
 // Reducers
 import { setMobileOpen } from "@reducer/sidebarReducer";
 
+import Profile from "./Profile";
+
 const Header = () => {
   const mobileOpen = useSelector((state) => state.sidebarReducer.mobileOpen);
   const dispatch = useDispatch();
@@ -45,9 +47,10 @@ const Header = () => {
         >
           <MenuIcon />
         </IconButton>
-        <Typography variant="h6" noWrap component="div">
+        <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
           {import.meta.env.VITE_APP_NAME}
         </Typography>
+        <Profile />
       </Toolbar>
       <Divider />
     </AppBar>
