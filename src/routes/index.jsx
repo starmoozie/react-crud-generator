@@ -11,7 +11,7 @@ import { DASHBOARD_MENU, AUTH_MENU } from "@constant";
 import { PRIVATE_PAGE, AUTH_PAGE } from "@config";
 import loadable from "@loadable/component";
 import AuthRoute from "./Public/Auth";
-import AuthLayout from "../components/Layouts/Public/Auth";
+import AuthLayout from "@layout/Public/Auth";
 import { useSelector } from "react-redux";
 
 const Router = () => {
