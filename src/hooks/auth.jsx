@@ -8,7 +8,7 @@ import React, {
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { DASHBOARD_MENU, PRIVATE_MENU } from "@constant/menu";
+import { DASHBOARD_MENU } from "@constant/menu";
 import { setPrivateMenu } from "@reducer/sidebarReducer";
 
 const AuthContext = createContext(null);
@@ -20,10 +20,8 @@ export const AuthProvider = ({ children }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const setMenu = (hasMenu) => {
-    dispatch(
-      setPrivateMenu(hasMenu ? [...DASHBOARD_MENU, ...PRIVATE_MENU] : [])
-    );
+  const setMenu = (hasMenu, menu) => {
+    dispatch(setPrivateMenu(hasMenu ? [...DASHBOARD_MENU, ...menu] : []));
   };
 
   const removeExistingCookies = () => {
@@ -39,7 +37,7 @@ export const AuthProvider = ({ children }) => {
     const response = await request.json();
 
     if (response.success) {
-      setMenu(true);
+      setMenu(true, response.data.role?.menu);
     } else {
       removeExistingCookies();
     }
@@ -52,8 +50,10 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const login = useCallback(async (auth, callback) => {
-    setMenu(true);
-    setCookies("profile", auth);
+    setMenu(true, auth.role?.menu);
+    const user = auth;
+    delete user.role;
+    setCookies("profile", user);
     navigate("/");
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
