@@ -14,6 +14,7 @@ import { useLocation } from "react-router-dom";
 import { processingData } from "@reducer/operationReducer";
 import { setFetchUrl, handleErrorMessage } from "@util";
 import Alert from "../Alert";
+import { useCookies } from "react-cookie";
 
 export const mapDefaultCreateValue = (fields) =>
   fields.reduce(
@@ -48,6 +49,7 @@ export const FormModal = (props) => {
   const { validation, row, access } = props;
   const dispatch = useDispatch();
   const location = useLocation();
+  const [cookies] = useCookies();
 
   const {
     handleSubmit,
@@ -66,13 +68,13 @@ export const FormModal = (props) => {
     // Open loading
     dispatch(setOpenLoading());
 
-    const url = setFetchUrl(location.pathname, access.method, row?.id);
+    const url = setFetchUrl(location.pathname, row?.id);
 
     try {
       // Dispatching fetch api request
-      await dispatch(
+      const a = await dispatch(
         processingData({
-          token: "123",
+          token: cookies.profile?.token,
           body: body,
           url: url,
           method: access.method,

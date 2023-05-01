@@ -1,4 +1,3 @@
-import { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 
 // Private Components
@@ -6,18 +5,34 @@ import PrivateRoute from "@route/Private";
 import PrivateLayout from "@layout/Private";
 
 // List Menu
-import { DASHBOARD_MENU, PRIVATE_MENU } from "@constant";
+import { DASHBOARD_MENU, AUTH_MENU } from "@constant";
 
 // Configuration
-import { PRIVATE_PAGE } from "@config";
+import { PRIVATE_PAGE, AUTH_PAGE } from "@config";
 import loadable from "@loadable/component";
+import AuthRoute from "./Public/Auth";
+import AuthLayout from "@layout/Public/Auth";
+import { useSelector } from "react-redux";
 
 const Router = () => {
+  const menu = useSelector((state) => state.sidebarReducer.privateMenu);
+
   return (
     <Routes>
+      <Route element={<AuthRoute />}>
+        <Route element={<AuthLayout />}>
+          {AUTH_MENU.map((item, index) => (
+            <Route
+              key={index}
+              path={item.path}
+              element={<PageComponent type={AUTH_PAGE} {...item} />}
+            />
+          ))}
+        </Route>
+      </Route>
       <Route element={<PrivateRoute />}>
         <Route element={<PrivateLayout />}>
-          {[...DASHBOARD_MENU, ...PRIVATE_MENU].map((item, index) => (
+          {[...DASHBOARD_MENU, ...menu].map((item, index) => (
             <Route
               key={index}
               path={item.path}
@@ -36,7 +51,7 @@ const PageComponent = (props) => {
   const type = props.type;
 
   const ChildComponent = loadable(
-    async () => await import(`../pages/${type}/${name}/index.jsx`)
+    async () => await import(`../pages/${type}/${name}`)
   );
 
   return <ChildComponent {...props} />;

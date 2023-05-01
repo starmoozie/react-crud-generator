@@ -3,7 +3,7 @@ import TooltipColumn from "@column/Tooltip";
 import DateFilter from "@filter/Date";
 import dayjs from "dayjs";
 import { useState } from "react";
-import { Box } from "@mui/material";
+import { Box, Chip, Tooltip } from "@mui/material";
 
 export const columns = [
   {
@@ -50,11 +50,14 @@ export const columns = [
         </Box>
       );
     },
+    Cell: ({ cell }) => (
+      <>{dayjs(cell.getValue()).format("dddd, MMMM D, YYYY")}</>
+    ),
   },
   {
-    accessorKey: "customer",
+    accessorKey: "customer.name",
+    accessor: "customer.name",
     header: "Customer",
-    Cell: ({ cell }) => <>{cell.getValue()?.name}</>,
   },
   {
     accessorKey: "items",
@@ -79,12 +82,6 @@ export const columns = [
     },
   },
   {
-    accessorKey: "totalAmount",
-    header: "Total Amount",
-    enableColumnFilter: false,
-    Cell: ({ cell }) => <>{rupiah(cell.getValue())}</>,
-  },
-  {
     accessorKey: "alreadyPaid",
     header: "Already Paid",
     enableColumnFilter: false,
@@ -103,16 +100,38 @@ export const columns = [
     },
   },
   {
-    accessorKey: "unpaid",
-    header: "Unpaid",
-    filterVariant: "checkbox",
-    Cell: ({ row }) => <>{rupiah(row.original.unpaid)}</>,
+    accessorKey: "totalAmount",
+    header: "Total Amount",
+    enableColumnFilter: false,
+    Cell: ({ cell }) => <>{rupiah(cell.getValue())}</>,
   },
   {
     accessorKey: "refund",
     header: "Refund",
     filterVariant: "checkbox",
-    Cell: ({ cell }) => <>{rupiah(cell.getValue())}</>,
+    Cell: ({ row }) => {
+      const entry = row.original;
+      const color =
+        parseInt(entry.refund) && !entry.refund_payabled
+          ? "success"
+          : "default";
+
+      const label =
+        entry.refund_payabled || !parseInt(entry.refund) ? "No" : "Yes";
+
+      const title =
+        entry.refund_payabled || !parseInt(entry.refund) ? (
+          <s>{rupiah(row.original.refund)}</s>
+        ) : (
+          rupiah(row.original.refund)
+        );
+
+      return (
+        <Tooltip title={title}>
+          <Chip color={color} label={label} size="small" />
+        </Tooltip>
+      );
+    },
   },
   {
     accessorKey: "netto",

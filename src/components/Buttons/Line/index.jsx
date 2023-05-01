@@ -13,13 +13,14 @@ const LineButton = ({ closeMenu, row, permission }) => {
 
   const handleClick = (button) => {
     const access = findCurrentAccess(permission.access, button.name);
+    const modalType = `${button.type}Modal`;
 
     dispatch(
       handleOpenModal({
-        type: button.modalType,
+        type: modalType,
         action: button.name,
         row: row,
-        size: button.modalType === CONFIRM_MODAL ? "sm" : "md",
+        size: modalType === CONFIRM_MODAL ? "sm" : "md",
         access: access,
       })
     );

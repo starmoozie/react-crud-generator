@@ -2,7 +2,7 @@ import { rupiah } from "@util";
 import DetailTable from "@detailtable";
 import TextColumn from "@column/Text";
 
-const columns = [
+const dataGridColumns = [
   {
     field: "product.code",
     headerName: "Product Code",
@@ -43,13 +43,12 @@ export const details = [
     },
   },
   {
-    accessorKey: "customer",
+    accessorKey: "customer.name",
     header: "Customer",
     attributes: {
       xs: 12,
       md: 4,
     },
-    Cell: ({ row }) => <TextColumn value={row.customer?.name} />,
   },
   {
     accessorKey: "totalAmount",
@@ -123,6 +122,8 @@ export const details = [
   {
     accessorKey: "items",
     header: "Items",
-    Cell: ({ row }) => <DetailTable row={row.items} columns={columns} />,
+    Cell: ({ row }) => (
+      <DetailTable row={row.items} columns={dataGridColumns} />
+    ),
   },
 ];

@@ -1,6 +1,4 @@
-import DateField from "../../../components/Fields/Date";
-import SelectField from "../../../components/Fields/Select";
-import { CheckboxField } from "@field";
+import { DateField, CheckboxField, SelectField } from "@field";
 
 export const createFields = [
   {
@@ -73,7 +71,7 @@ export const createFields = [
     },
   },
   {
-    accessorKey: "pay_refund",
+    accessorKey: "refund_payabled",
     header: "Pay Refund",
     Cell: (props) => <CheckboxField {...props} />,
   },
@@ -92,6 +90,12 @@ export const createFields = [
           <SelectField
             {...props}
             endpoint="/products"
+            filters={[
+              {
+                id: "is_sold",
+                value: "false",
+              },
+            ]}
             primaryKey="id"
             attribute="code"
             defaultValue={props.row?.items[props.index]?.product || ""}

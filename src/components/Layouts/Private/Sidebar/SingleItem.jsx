@@ -15,7 +15,7 @@ const SingleItem = ({ item }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const ItemIcon = Icon[item.name];
+  const ItemIcon = Icon[item.name.replace(" ", "")];
 
   const handleClick = () => {
     navigate(item.path);

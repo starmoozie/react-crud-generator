@@ -1,5 +1,5 @@
 import axios from "axios";
-import _ from "lodash";
+import _, { isObject } from "lodash";
 
 export const rupiah = (number) => {
   return new Intl.NumberFormat("id-ID", {
@@ -34,38 +34,21 @@ export const removeArrayObjectContainsArray = (array, compareArray) =>
 export const findCurrentAccess = (access, property) =>
   access.find((acc) => acc.name.toLowerCase() === property.toLowerCase());
 
-export const setFetchUrl = (path, method, id) => {
-  const endpoint = method.toLowerCase() === "post" ? path : `${path}/${id}`;
+export const setFetchUrl = (path, id) => {
+  const endpoint = id ? `${path}/${id}` : path;
 
   return `${import.meta.env.VITE_BASE_API_URL}${
     import.meta.env.VITE_ENDPOINT_API
   }${endpoint}`;
 };
 
-export const defaultFetch = async (
-  location,
-  columnFilters,
-  pageIndex,
-  pageSize,
-  sorting
-) => {
-  const path = `${import.meta.env.VITE_ENDPOINT_API}${location}`;
-  const filtereData = removeUndefinedArray(columnFilters);
-
-  const fetchURL = new URL(path, import.meta.env.VITE_BASE_API_URL);
-
-  fetchURL.searchParams.set("page", `${pageIndex + 1}`);
-  fetchURL.searchParams.set("per_page", `${pageSize}`);
-  fetchURL.searchParams.set("filters", JSON.stringify(filtereData));
-  fetchURL.searchParams.set("sort", JSON.stringify(sorting));
-
-  const response = await fetch(fetchURL.href);
-  const json = await response.json();
-
-  return json;
-};
-
 export async function fetchApi(params) {
+  const query = params.query
+    ? {
+        params: params.query,
+      }
+    : {};
+
   const config = {
     headers: {
       "Content-Type": "application/json",
@@ -73,6 +56,7 @@ export async function fetchApi(params) {
     },
     url: params.url,
     method: params.method,
+    ...query,
   };
 
   if (params.body) {
@@ -84,20 +68,29 @@ export async function fetchApi(params) {
 
     return response.data;
   } catch (error) {
-    const message = error.response.data.message;
+    const message = error.response?.data?.message || error.message;
+
     return Promise.reject(
-      Array.isArray(message) ? JSON.stringify(message) : message
+      Array.isArray(message) || isObject(message)
+        ? JSON.stringify(message)
+        : message
     );
   }
 }
 
 export const handleErrorMessage = (error, setError) => {
   const message = error.message;
-  const isArray = Array.isArray(message);
+  let parsed = "";
+
+  try {
+    parsed = JSON.parse(message);
+  } catch (error) {
+    parsed = false;
+  }
 
   // Set error validation message if message is array
-  if (isArray) {
-    Object.entries(message).forEach(([key, value]) => {
+  if (parsed) {
+    Object.entries(parsed).forEach(([key, value]) => {
       setError(key, {
         type: "server",
         message: value.join(", "),
@@ -141,3 +134,6 @@ export const handleClientValidationMessage = (
     message: message,
   };
 };
+
+export const getNestedObjectValue = (object, key) =>
+  key.split(".").reduce((prev, cur) => prev[cur], object);

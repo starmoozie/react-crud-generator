@@ -10,10 +10,11 @@ import { useForm } from "react-hook-form";
 import SubmitButton from "../Buttons/Submit";
 import CloseButton from "../Buttons/Close";
 import { processingData } from "@reducer/operationReducer";
-import { setFetchUrl, handleErrorMessage } from "@util";
+import { setFetchUrl } from "@util";
 import Alert from "../Alert";
 import { useState } from "react";
 import { Grid } from "@mui/material";
+import { useCookies } from "react-cookie";
 
 export const ConfirmModal = (props) => {
   const { row, action, access } = props;
@@ -21,6 +22,7 @@ export const ConfirmModal = (props) => {
 
   const dispatch = useDispatch();
   const location = useLocation();
+  const [cookies] = useCookies();
 
   const { handleSubmit } = useForm({});
 
@@ -28,17 +30,13 @@ export const ConfirmModal = (props) => {
     // Open loading
     dispatch(setOpenLoading());
 
-    const url = setFetchUrl(
-      location.pathname,
-      access.method,
-      JSON.stringify([row.id])
-    );
+    const url = setFetchUrl(location.pathname, JSON.stringify([row.id]));
 
     try {
       // Dispatching fetch api request
       await dispatch(
         processingData({
-          token: "123",
+          token: cookies.profile?.token,
           url: url,
           method: access.method,
         })

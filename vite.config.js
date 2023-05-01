@@ -24,6 +24,7 @@ export default defineConfig(({ mode }) => {
       alias: {
         "@": path.resolve(__dirname, "./src/"),
         "@button": path.resolve(__dirname, "./src/components/Buttons/"),
+        "@component": path.resolve(__dirname, "./src/components/"),
         "@column": path.resolve(__dirname, "./src/components/Columns/"),
         "@datatable": path.resolve(__dirname, "./src/components/Datatable/"),
         "@detailtable": path.resolve(

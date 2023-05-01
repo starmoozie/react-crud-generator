@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import MaterialReactTable, {
   MRT_ShowHideColumnsButton,
 } from "material-react-table";
-import { Typography, Box } from "@mui/material";
+import { Typography, Box, Button } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import { useLocation } from "react-router-dom";
 import Modal from "@modal";
@@ -11,7 +11,8 @@ import LineButton from "@button/Line";
 import TopButton from "@button/Top";
 import { useSelector } from "react-redux";
 import { TOP_LEFT, TOP_RIGHT, LINE } from "@constant";
-import { defaultFetch } from "@util";
+import { setFetchUrl, fetchApi } from "@util";
+import { useCookies } from "react-cookie";
 
 const Datatable = ({
   title,
@@ -21,8 +22,10 @@ const Datatable = ({
   editFields,
   createValidation,
   editValidation,
+  BottomToolbar,
 }) => {
   const location = useLocation();
+  const [cookies] = useCookies();
 
   const [columnFilters, setColumnFilters] = useState([]);
   const [sorting, setSorting] = useState([]);
@@ -72,13 +75,17 @@ const Datatable = ({
         sorting,
       ],
       queryFn: async () => {
-        return await defaultFetch(
-          location.pathname,
-          columnFilters,
-          pagination.pageIndex,
-          pagination.pageSize,
-          sorting
-        );
+        return await fetchApi({
+          token: cookies.profile?.token,
+          url: setFetchUrl(location.pathname),
+          method: "GET",
+          query: {
+            page: pagination.pageIndex + 1,
+            per_page: pagination.pageSize,
+            filters: JSON.stringify(columnFilters),
+            sort: JSON.stringify(sorting),
+          },
+        });
       },
       keepPreviousData: true,
     }
@@ -181,9 +188,17 @@ const Datatable = ({
           }
         }
         enableStickyHeader
+        enableStickyFooter
         muiTableContainerProps={{ sx: { maxHeight: 610 } }}
         columnVisibility={visibilityColumns}
         onColumnVisibilityChange={setVisibilityColumns}
+        renderBottomToolbarCustomActions={({ table }) =>
+          BottomToolbar ? (
+            <BottomToolbar table={table} data={data?.data ?? []} />
+          ) : (
+            <Box />
+          )
+        }
       />
 
       {/* Modal component */}
