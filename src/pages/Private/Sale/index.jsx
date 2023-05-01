@@ -1,7 +1,7 @@
 import Datatable from "@datatable";
 import { columns, details, createFields, editFields, validation } from "./inc";
 import { sumBy } from "lodash";
-import { Typography, Box } from "@mui/material";
+import { Typography, Box, Chip } from "@mui/material";
 import { rupiah } from "@util";
 
 const Sale = (props) => {
@@ -17,22 +17,14 @@ const Sale = (props) => {
       createFields={createFields} // Optional if customize create fields
       editFields={editFields} // Optional if customize edit fields
       BottomToolbar={({ table, data }) => {
-        const totalAmount = sumBy(data, "totalAmount");
-        const totalNetto = sumBy(data, "netto");
-        const totalBurutto = sumBy(data, "brutto");
-
         const values = [
           {
-            name: "Total Amount",
-            value: totalAmount,
+            name: "Netto",
+            value: sumBy(data, "netto"),
           },
           {
-            name: "Total Netto",
-            value: totalNetto,
-          },
-          {
-            name: "Total Brutto",
-            value: totalBurutto,
+            name: "Brutto",
+            value: sumBy(data, "brutto"),
           },
         ];
 
@@ -40,7 +32,15 @@ const Sale = (props) => {
           <Box sx={{ pl: 1 }}>
             {values.map((value, index) => (
               <Typography variant="body2" key={index} gutterBottom>
-                {value.name}: <strong>{rupiah(value.value)}</strong>
+                {value.name}:{" "}
+                <Chip
+                  label={
+                    <Typography variant="body2" color="primary">
+                      {rupiah(value.value)}
+                    </Typography>
+                  }
+                  size="small"
+                />
               </Typography>
             ))}
           </Box>
