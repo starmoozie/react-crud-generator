@@ -4,6 +4,14 @@
 
 Standard CRUD Generator ReactJS with validation.
 
+### Usage
+
+Use comment below to generate default crud components
+
+```
+npm run generate starmoozie:component {name}
+```
+
 ### Supported Features
 
 #### Fields
