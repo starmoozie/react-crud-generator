@@ -36,6 +36,8 @@ export const operationReducer = createSlice({
       switch (action.meta.arg.method.toLowerCase()) {
         case "post":
           state.changed = Math.random().toString(36).slice(2, 7);
+          state.openAlert = true;
+          state.alertMessage = action.payload.message;
 
           break;
 
@@ -48,6 +50,8 @@ export const operationReducer = createSlice({
 
         default: // This delete method
           state.changed = Math.random().toString(36).slice(2, 7);
+          state.openAlert = true;
+          state.alertMessage = action.payload.message;
 
           break;
       }
