@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk, current } from "@reduxjs/toolkit";
-import { fetchApi } from "@util";
+import { fetchApi, handleAfterFetch } from "@util";
 
 const initialState = {
   loading: false,
@@ -35,23 +35,17 @@ export const operationReducer = createSlice({
     builder.addCase(processingData.fulfilled, (state, action) => {
       switch (action.meta.arg.method.toLowerCase()) {
         case "post":
-          state.changed = Math.random().toString(36).slice(2, 7);
-          state.openAlert = true;
-          state.alertMessage = action.payload.message;
+          handleAfterFetch(state, action);
 
           break;
 
         case "put":
-          state.changed = Math.random().toString(36).slice(2, 7);
-          state.openAlert = true;
-          state.alertMessage = action.payload.message;
+          handleAfterFetch(state, action);
 
           break;
 
         default: // This delete method
-          state.changed = Math.random().toString(36).slice(2, 7);
-          state.openAlert = true;
-          state.alertMessage = action.payload.message;
+          handleAfterFetch(state, action);
 
           break;
       }

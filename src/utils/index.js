@@ -138,3 +138,9 @@ export const handleClientValidationMessage = (
 
 export const getNestedObjectValue = (object, key) =>
   key.split(".").reduce((prev, cur) => prev[cur], object);
+
+export const handleAfterFetch = (state, action) => {
+  state.changed = Math.random().toString(36).slice(2, 7);
+  state.openAlert = true;
+  state.alertMessage = action.payload.message;
+};
