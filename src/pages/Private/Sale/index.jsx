@@ -1,7 +1,7 @@
 import Datatable from "@datatable";
 import { columns, details, createFields, editFields, validation } from "./inc";
 import { sumBy } from "lodash";
-import { Typography, Box, Chip } from "@mui/material";
+import { Typography, Box } from "@mui/material";
 import { rupiah } from "@util";
 
 const Sale = (props) => {
@@ -32,15 +32,7 @@ const Sale = (props) => {
           <Box sx={{ pl: 1 }}>
             {values.map((value, index) => (
               <Typography variant="body2" key={index} gutterBottom>
-                {value.name}:{" "}
-                <Chip
-                  label={
-                    <Typography variant="body2" color="primary">
-                      {rupiah(value.value)}
-                    </Typography>
-                  }
-                  size="small"
-                />
+                {value.name}: <b>{rupiah(value.value)}</b>
               </Typography>
             ))}
           </Box>

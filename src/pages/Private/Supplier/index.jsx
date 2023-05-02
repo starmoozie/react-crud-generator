@@ -1,6 +1,8 @@
 import Datatable from "@datatable";
 import TextField from "@field/Text";
 import * as yup from "yup";
+import Chip from "@mui/material/Chip";
+import { rupiah } from "@util";
 
 const columns = [
   {
@@ -10,6 +12,18 @@ const columns = [
   {
     accessorKey: "phone",
     header: "Phone",
+  },
+  {
+    accessorKey: "product",
+    header: "Transactions",
+    enableColumnFilter: false,
+    enableSorting: false,
+    Cell: ({ cell }) => (
+      <Chip
+        label={rupiah(cell.getValue()?.length).replace("Rp", "")}
+        size="small"
+      />
+    ),
   },
 ];
 

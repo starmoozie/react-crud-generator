@@ -9,7 +9,6 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import { Link as RouterLink } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-// import { useMutation } from "react-query";
 
 import { useAuth } from "@hook";
 import { validation } from "./validation";

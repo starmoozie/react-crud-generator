@@ -50,7 +50,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const login = useCallback(async (auth, callback) => {
-    setMenu(true, auth.role?.menu);
+    setMenu(true, auth.role?.menu || []);
     const user = auth;
     delete user.role;
     setCookies("profile", user);

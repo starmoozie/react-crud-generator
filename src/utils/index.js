@@ -68,7 +68,8 @@ export async function fetchApi(params) {
 
     return response.data;
   } catch (error) {
-    const message = error.response?.data?.message || error.message;
+    const err = error.response?.data;
+    const message = err?.errors || err?.message || error.message;
 
     return Promise.reject(
       Array.isArray(message) || isObject(message)
