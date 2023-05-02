@@ -4,6 +4,8 @@ import { fetchApi } from "@util";
 const initialState = {
   loading: false,
   changed: "",
+  openAlert: false,
+  alertMessage: "",
 };
 
 export const processingData = createAsyncThunk(
@@ -24,6 +26,10 @@ export const operationReducer = createSlice({
     setCloseLoading(state) {
       state.loading = false;
     },
+    setCloseAlert(state) {
+      state.openAlert = false;
+      state.alertMessage = "";
+    },
   },
   extraReducers(builder) {
     builder.addCase(processingData.fulfilled, (state, action) => {
@@ -35,6 +41,8 @@ export const operationReducer = createSlice({
 
         case "put":
           state.changed = Math.random().toString(36).slice(2, 7);
+          state.openAlert = true;
+          state.alertMessage = action.payload.message;
 
           break;
 
@@ -47,6 +55,7 @@ export const operationReducer = createSlice({
   },
 });
 
-export const { setOpenLoading, setCloseLoading } = operationReducer.actions;
+export const { setOpenLoading, setCloseLoading, setCloseAlert } =
+  operationReducer.actions;
 
 export default operationReducer.reducer;
