@@ -69,7 +69,14 @@ const editFields = [
 const editValidation = yup
   .object({
     name: yup.string().required().max(50),
-    phone: yup.string().nullable().max(15),
+    phone: yup
+      .number()
+      .typeError("Sell Price must be a number")
+      .nullable()
+      .test("len", "Pay Amount max 15 digits", (val) =>
+        val ? val.toString().length <= 15 : true
+      )
+      .transform((_, val) => (val !== "" ? Number(val) : null)),
   })
   .required();
 
