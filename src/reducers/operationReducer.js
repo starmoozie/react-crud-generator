@@ -1,9 +1,11 @@
 import { createSlice, createAsyncThunk, current } from "@reduxjs/toolkit";
-import { fetchApi } from "@util";
+import { fetchApi, handleAfterFetch } from "@util";
 
 const initialState = {
   loading: false,
   changed: "",
+  openAlert: false,
+  alertMessage: "",
 };
 
 export const processingData = createAsyncThunk(
@@ -24,22 +26,26 @@ export const operationReducer = createSlice({
     setCloseLoading(state) {
       state.loading = false;
     },
+    setCloseAlert(state) {
+      state.openAlert = false;
+      state.alertMessage = "";
+    },
   },
   extraReducers(builder) {
     builder.addCase(processingData.fulfilled, (state, action) => {
       switch (action.meta.arg.method.toLowerCase()) {
         case "post":
-          state.changed = Math.random().toString(36).slice(2, 7);
+          handleAfterFetch(state, action);
 
           break;
 
         case "put":
-          state.changed = Math.random().toString(36).slice(2, 7);
+          handleAfterFetch(state, action);
 
           break;
 
         default: // This delete method
-          state.changed = Math.random().toString(36).slice(2, 7);
+          handleAfterFetch(state, action);
 
           break;
       }
@@ -47,6 +53,7 @@ export const operationReducer = createSlice({
   },
 });
 
-export const { setOpenLoading, setCloseLoading } = operationReducer.actions;
+export const { setOpenLoading, setCloseLoading, setCloseAlert } =
+  operationReducer.actions;
 
 export default operationReducer.reducer;

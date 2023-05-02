@@ -17,7 +17,7 @@ import { processingData } from "@reducer/operationReducer";
 import { setFetchUrl, handleErrorMessage } from "@util";
 import { useDispatch } from "react-redux";
 import { setOpenLoading, setCloseLoading } from "@reducer/operationReducer";
-import Alert from "@component/Alert";
+import Alert from "@component/Alerts/Alert";
 
 const Login = (props) => {
   const { path } = props;

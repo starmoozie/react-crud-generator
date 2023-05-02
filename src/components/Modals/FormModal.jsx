@@ -13,7 +13,7 @@ import CloseButton from "../Buttons/Close";
 import { useLocation } from "react-router-dom";
 import { processingData } from "@reducer/operationReducer";
 import { setFetchUrl, handleErrorMessage } from "@util";
-import Alert from "../Alert";
+import Alert from "../Alerts/Alert";
 import { useCookies } from "react-cookie";
 
 export const mapDefaultCreateValue = (fields) =>

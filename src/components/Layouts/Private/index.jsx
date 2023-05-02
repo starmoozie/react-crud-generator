@@ -6,6 +6,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Header from "@layout/Private/Header";
 import Sidebar from "@layout/Private/Sidebar";
 import Body from "@layout/Private/Body";
+import Snackbar from "../../Alerts/Snackbar";
 
 const PrivateLayout = () => {
   return (
@@ -14,6 +15,7 @@ const PrivateLayout = () => {
       <Header />
       <Sidebar />
       <Body />
+      <Snackbar />
     </Box>
   );
 };

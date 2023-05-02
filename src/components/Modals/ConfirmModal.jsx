@@ -11,7 +11,7 @@ import SubmitButton from "../Buttons/Submit";
 import CloseButton from "../Buttons/Close";
 import { processingData } from "@reducer/operationReducer";
 import { setFetchUrl } from "@util";
-import Alert from "../Alert";
+import Alert from "../Alerts/Alert";
 import { useState } from "react";
 import { Grid } from "@mui/material";
 import { useCookies } from "react-cookie";
