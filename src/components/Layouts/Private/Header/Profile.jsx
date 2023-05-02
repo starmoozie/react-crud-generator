@@ -1,16 +1,19 @@
 import { useState } from "react";
 import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { useAuth } from "@hook";
+import ListItemText from "@mui/material/ListItemText";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 const settings = [
   {
     name: "Logout",
     action: (logout) => logout(),
+    icon: <LogoutIcon />,
   },
 ];
 
@@ -54,7 +57,8 @@ function Profile() {
       >
         {settings.map((setting) => (
           <MenuItem key={setting.name} onClick={() => setting.action(logout)}>
-            <Typography textAlign="center">{setting.name}</Typography>
+            <ListItemIcon>{setting.icon}</ListItemIcon>
+            <ListItemText>{setting.name}</ListItemText>
           </MenuItem>
         ))}
       </Menu>
