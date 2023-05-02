@@ -116,9 +116,9 @@ export const FormModal = (props) => {
           })}
         </Grid>
       </DialogContent>
-      <DialogActions sx={{ pr: 3, pb: 3 }}>
-        <CloseButton />
+      <DialogActions sx={{ pl: 3, pb: 3, justifyContent: "flex-start" }}>
         <SubmitButton />
+        <CloseButton />
       </DialogActions>
     </Box>
   );

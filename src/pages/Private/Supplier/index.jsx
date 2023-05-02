@@ -27,6 +27,24 @@ const columns = [
   },
 ];
 
+const details = [
+  {
+    accessorKey: "name",
+    header: "Name",
+  },
+  {
+    accessorKey: "phone",
+    header: "Phone",
+  },
+  {
+    accessorKey: "product",
+    header: "Transactions",
+    Cell: ({ row, field }) => (
+      <>{rupiah(row[field.accessorKey]?.length).replace("Rp", "")}</>
+    ),
+  },
+];
+
 const createFields = [
   {
     accessorKey: "items",
@@ -69,7 +87,14 @@ const editFields = [
 const editValidation = yup
   .object({
     name: yup.string().required().max(50),
-    phone: yup.string().nullable().max(15),
+    phone: yup
+      .number()
+      .typeError("Sell Price must be a number")
+      .nullable()
+      .test("len", "Pay Amount max 15 digits", (val) =>
+        val ? val.toString().length <= 15 : true
+      )
+      .transform((_, val) => (val !== "" ? Number(val) : null)),
   })
   .required();
 
@@ -86,6 +111,7 @@ const Supplier = (props) => {
     <Datatable
       title={name}
       columns={columns}
+      details={details}
       createFields={createFields} // Optional if customize create fields
       editFields={editFields} // Optional if customize edit fields
       createValidation={createValidation}

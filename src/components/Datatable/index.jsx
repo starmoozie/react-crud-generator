@@ -150,7 +150,7 @@ const Datatable = ({
         positionToolbarAlertBanner="bottom"
         memoMode="cells"
         enableRowActions={linePermission ? true : false}
-        positionActionsColumn="last"
+        // positionActionsColumn="last"
         renderRowActionMenuItems={({ closeMenu, row }) => (
           <div>
             {linePermission ? (

@@ -65,9 +65,9 @@ export const ConfirmModal = (props) => {
           </Grid>
         </Grid>
       </DialogContent>
-      <DialogActions sx={{ pr: 3, pb: 3 }}>
-        <CloseButton header="No" />
+      <DialogActions sx={{ pl: 3, pb: 3, justifyContent: "flex-start" }}>
         <SubmitButton header="Yes" color="error" />
+        <CloseButton header="No" />
       </DialogActions>
     </Box>
   );

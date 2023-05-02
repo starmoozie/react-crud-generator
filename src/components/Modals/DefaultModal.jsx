@@ -55,7 +55,7 @@ export const DefaultModal = ({ columns, row }) => {
           })}
         </Grid>
       </DialogContent>
-      <DialogActions sx={{ p: 3 }}>
+      <DialogActions sx={{ pl: 3, pb: 3, pt: 3, justifyContent: "flex-start" }}>
         <Button onClick={handleClose}>Close</Button>
       </DialogActions>
     </>

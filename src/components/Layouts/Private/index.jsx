@@ -10,7 +10,7 @@ import Snackbar from "../../Alerts/Snackbar";
 
 const PrivateLayout = () => {
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: { sm: "flex", xs: "block" } }}>
       <CssBaseline />
       <Header />
       <Sidebar />

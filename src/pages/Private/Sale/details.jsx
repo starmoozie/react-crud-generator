@@ -1,6 +1,7 @@
 import { rupiah } from "@util";
 import DetailTable from "@detailtable";
 import TextColumn from "@column/Text";
+import dayjs from "dayjs";
 
 const dataGridColumns = [
   {
@@ -41,6 +42,7 @@ export const details = [
       xs: 12,
       md: 4,
     },
+    Cell: ({ row }) => <>{dayjs(row.date).format("dddd, MMMM D, YYYY")}</>,
   },
   {
     accessorKey: "customer.name",
@@ -57,7 +59,7 @@ export const details = [
       xs: 12,
       md: 4,
     },
-    Cell: ({ row }) => <TextColumn value={row.totalAmount} />,
+    Cell: ({ row }) => <TextColumn value={rupiah(row.totalAmount)} />,
   },
   {
     accessorKey: "alreadyPaid",

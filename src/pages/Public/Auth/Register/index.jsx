@@ -123,9 +123,14 @@ const Register = (props) => {
         </Button>
         <Grid container>
           <Grid item xs>
-            <Link component={RouterLink} variant="body2" to={`/login`}>
-              {"Already have an account? Login"}
-            </Link>
+            <>
+              <Typography variant="body2">
+                {"Already have an account?"}{" "}
+                <Link variant="body2" component={RouterLink} to={`/login`}>
+                  {"Login"}
+                </Link>
+              </Typography>
+            </>
           </Grid>
         </Grid>
       </Box>

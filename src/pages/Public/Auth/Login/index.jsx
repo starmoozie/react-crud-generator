@@ -18,6 +18,7 @@ import { setFetchUrl, handleErrorMessage } from "@util";
 import { useDispatch } from "react-redux";
 import { setOpenLoading, setCloseLoading } from "@reducer/operationReducer";
 import Alert from "@component/Alerts/Alert";
+import { FORGOT_PASSWORD, REGISTER } from "@config/app";
 
 const Login = (props) => {
   const { path } = props;
@@ -119,14 +120,27 @@ const Login = (props) => {
         </Button>
         <Grid container>
           <Grid item xs>
-            <Link href="#" variant="body2">
-              Forgot password?
-            </Link>
+            {FORGOT_PASSWORD ? (
+              <Link href="#" variant="body2">
+                Forgot password?
+              </Link>
+            ) : (
+              <></>
+            )}
           </Grid>
           <Grid item>
-            <Link variant="body2" component={RouterLink} to={`/register`}>
-              {"Don't have an account? Register"}
-            </Link>
+            {REGISTER ? (
+              <>
+                <Typography variant="body2">
+                  {"Don't have an account?"}{" "}
+                  <Link variant="body2" component={RouterLink} to={`/register`}>
+                    {"Register"}
+                  </Link>
+                </Typography>
+              </>
+            ) : (
+              <></>
+            )}
           </Grid>
         </Grid>
       </Box>
