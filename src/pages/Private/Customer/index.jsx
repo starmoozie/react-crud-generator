@@ -27,6 +27,24 @@ const columns = [
   },
 ];
 
+const details = [
+  {
+    accessorKey: "name",
+    header: "Name",
+  },
+  {
+    accessorKey: "phone",
+    header: "Phone",
+  },
+  {
+    accessorKey: "sale",
+    header: "Transactions",
+    Cell: ({ row, field }) => (
+      <>{rupiah(row[field.accessorKey]?.length).replace("Rp", "")}</>
+    ),
+  },
+];
+
 const createFields = [
   {
     accessorKey: "items",
@@ -93,6 +111,7 @@ const Customer = (props) => {
     <Datatable
       title={name}
       columns={columns}
+      details={details}
       createFields={createFields} // Optional if customize create fields
       editFields={editFields} // Optional if customize edit fields
       createValidation={createValidation}
