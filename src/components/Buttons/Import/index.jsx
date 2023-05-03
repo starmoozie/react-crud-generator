@@ -5,11 +5,15 @@ import { UPLOAD as title } from "@constant";
 import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setOpenLoading, setCloseLoading } from "@reducer/operationReducer";
+import { useLocation } from "react-router-dom";
+import { processingData } from "@reducer/operationReducer";
+import { setFetchUrl, handleErrorMessage } from "@util";
 
-const Import = () => {
+const Import = ({ inputProps }) => {
   const inputFile = useRef();
   const loading = useSelector((state) => state.operationReducer.loading);
   const dispatch = useDispatch();
+  const location = useLocation();
 
   const handleClick = () => {
     inputFile.current.click();
@@ -19,22 +23,27 @@ const Import = () => {
     const file = event.target.files;
 
     if (file.length) {
+      // Open loading
       dispatch(setOpenLoading());
-      setTimeout(() => {
-        console.log(file);
-        dispatch(setCloseLoading());
-      }, 5000);
-      // const formData = new FormData();
-      // formData.append("file", file);
-      // axios
-      //   .request({
-      //     headers: { Authorization: `Bearer ${cookies.token}` },
-      //     method: "POST",
-      //     url: "http://localhost:8000/api/v1/customers-upload/",
-      //     data: formData,
-      //     onUploadProgress: (e) => handleUploadProgress(e, file.name),
-      //   })
-      //   .then((e) => {});
+
+      const formData = new FormData();
+      formData.append("file", file);
+
+      try {
+        // Dispatching fetch api request
+        await dispatch(
+          processingData({
+            body: formData,
+            url: setFetchUrl(`${location.pathname}/import`),
+            method: "POST",
+          })
+        ).unwrap();
+      } catch (error) {
+        // Handling error message
+        alert(error.message);
+      }
+      // Close loading if finished
+      dispatch(setCloseLoading());
     }
   };
 
@@ -46,6 +55,7 @@ const Import = () => {
         </IconButton>
       </Tooltip>
       <input
+        {...inputProps}
         name="file"
         type="file"
         id="file"

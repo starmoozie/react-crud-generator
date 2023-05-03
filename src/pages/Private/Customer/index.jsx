@@ -116,6 +116,7 @@ const Customer = (props) => {
       editFields={editFields} // Optional if customize edit fields
       createValidation={createValidation}
       editValidation={editValidation}
+      imports={{ accept: ".xls,.xlsx", multiple: false }}
     />
   );
 };
