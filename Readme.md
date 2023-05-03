@@ -31,6 +31,77 @@ npm run generate starmoozie:component {name}
 
 - Date
 
+#### BE dynamic menu response format
+
+```
+[
+    {
+        "id": 1,
+        "name": "Supplier",
+        "path": "/suppliers",
+        "permission": [
+            {
+                "access": [
+                    {
+                        "key": "create",
+                        "name": "Create",
+                        "type": null,
+                        "method": "post",
+                        "position": "top-left"
+                    }
+                ],
+                "position": "top-left"
+            },
+            {
+                "access": [
+                    {
+                        "key": "export",
+                        "name": "Export",
+                        "type": null,
+                        "method": null,
+                        "position": "top-right"
+                    },
+                    {
+                        "key": "import",
+                        "name": "Import",
+                        "type": null,
+                        "method": null,
+                        "position": "top-right"
+                    }
+                ],
+                "position": "top-right"
+            },
+            {
+                "access": [
+                    {
+                        "key": "detail",
+                        "name": "Detail",
+                        "type": "Default",
+                        "method": null,
+                        "position": "line"
+                    },
+                    {
+                        "key": "edit",
+                        "name": "Edit",
+                        "type": "Form",
+                        "method": "put",
+                        "position": "line"
+                    },
+                    {
+                        "key": "delete",
+                        "name": "Delete",
+                        "type": "Confirm",
+                        "method": "delete",
+                        "position": "line"
+                    }
+                ],
+                "position": "line"
+            }
+        ]
+    },
+]
+```
+
 #### Menu based Permissions
 
 - [menu permissions](https://github.com/starmoozie/react-crud-generator/blob/main/src/constants/menu.js)
