@@ -27,7 +27,7 @@ export const columns = [
           column.setFilterValue(filterDate);
         }
         if (!filterDate.min && !filterDate.max) {
-          column.setFilterValue([]);
+          column.setFilterValue();
         }
       };
 
