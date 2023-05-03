@@ -1,55 +1,16 @@
 import { rupiah } from "@util";
 import TooltipColumn from "@column/Tooltip";
-import DateFilter from "@filter/Date";
+import DateRange from "@filter/DateRange";
 import dayjs from "dayjs";
-import { useState } from "react";
-import { Box, Chip, Tooltip } from "@mui/material";
+import { Chip, Tooltip } from "@mui/material";
 
 export const columns = [
   {
     accessorKey: "date",
     header: "Date",
-    Filter: ({ column }) => {
-      const [filter, setFilter] = useState({
-        min: "",
-        max: "",
-      });
-
-      const handleChange = (data) => {
-        const value = data.value ? dayjs(data.value).format("YYYY-MM-DD") : "";
-        const filterDate = {
-          min: data.name === "min" ? value : filter.min,
-          max: data.name === "max" ? value : filter.max,
-        };
-        setFilter({ ...filter, ...filterDate });
-
-        if (filterDate.min && filterDate.max) {
-          column.setFilterValue(filterDate);
-        }
-        if (!filterDate.min && !filterDate.max) {
-          column.setFilterValue();
-        }
-      };
-
-      return (
-        <Box
-          sx={{ display: "grid", gridTemplateColumns: "6fr 6fr", gap: "1rem" }}
-        >
-          <DateFilter
-            maxDate={filter.maxDate}
-            name="min"
-            setFilterValue={(e) => handleChange(e)}
-            label={`Min Date`}
-          />
-          <DateFilter
-            minDate={filter.min}
-            name="max"
-            setFilterValue={(e) => handleChange(e)}
-            label={`Max Date`}
-          />
-        </Box>
-      );
-    },
+    Filter: ({ column }) => (
+      <DateRange setFilterValue={column.setFilterValue} />
+    ),
     Cell: ({ cell }) => (
       <>{dayjs(cell.getValue()).format("dddd, MMMM D, YYYY")}</>
     ),
