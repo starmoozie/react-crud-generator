@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setOpenLoading, setCloseLoading } from "@reducer/operationReducer";
 import { useLocation } from "react-router-dom";
 import { processingData } from "@reducer/operationReducer";
-import { setFetchUrl, handleErrorMessage } from "@util";
+import { setFetchUrl } from "@util";
 
 const Import = ({ inputProps }) => {
   const inputFile = useRef();
