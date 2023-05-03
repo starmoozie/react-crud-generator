@@ -293,9 +293,10 @@ npm run generate starmoozie:component {name}
 
 ```
 
-#### Menu based Permissions
+#### Install
 
-- [menu permissions](https://github.com/starmoozie/react-crud-generator/blob/main/src/constants/menu.js)
+- `npm install`
+- `cp .env.example .env`
 
 #### Packages
 
