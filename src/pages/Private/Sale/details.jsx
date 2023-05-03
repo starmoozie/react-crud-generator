@@ -7,30 +7,34 @@ const dataGridColumns = [
   {
     field: "product.code",
     headerName: "Product Code",
-    sortable: false,
+    sortable: true,
     flex: 1,
     valueGetter: (params) => params.row.product.code,
+    renderHeader: (props) => <b>Code</b>,
   },
   {
     field: "product.name",
     headerName: "Product Name",
-    sortable: false,
+    sortable: true,
     flex: 1,
     valueGetter: (params) => params.row.product.name,
+    renderHeader: (props) => <b>Name</b>,
   },
   {
     field: "product.buy_price",
     headerName: "Buy Price",
-    sortable: false,
+    sortable: true,
     flex: 1,
     valueGetter: (params) => rupiah(params.row.product.buy_price),
+    renderHeader: (props) => <b>Buy Price</b>,
   },
   {
     field: "sell_price",
     headerName: "Sell Price",
-    sortable: false,
+    sortable: true,
     flex: 1,
     valueGetter: (params) => rupiah(params.row.sell_price),
+    renderHeader: (props) => <b>Sell Price</b>,
   },
 ];
 
