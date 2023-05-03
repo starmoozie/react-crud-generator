@@ -3,7 +3,7 @@ import dayjs from "dayjs";
 import { useState } from "react";
 import { Box } from "@mui/material";
 
-const DateRange = ({ setFilterValue }) => {
+const DateRangeFilter = ({ setFilterValue }) => {
   const [filter, setFilter] = useState({
     min: "",
     max: "",
@@ -43,4 +43,4 @@ const DateRange = ({ setFilterValue }) => {
   );
 };
 
-export default DateRange;
+export default DateRangeFilter;

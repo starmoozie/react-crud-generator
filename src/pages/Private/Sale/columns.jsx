@@ -1,6 +1,6 @@
 import { rupiah } from "@util";
 import TooltipColumn from "@column/Tooltip";
-import DateRange from "@filter/DateRange";
+import DateRangeFilter from "@filter/DateRange";
 import dayjs from "dayjs";
 import { Chip, Tooltip } from "@mui/material";
 
@@ -9,7 +9,7 @@ export const columns = [
     accessorKey: "date",
     header: "Date",
     Filter: ({ column }) => (
-      <DateRange setFilterValue={column.setFilterValue} />
+      <DateRangeFilter setFilterValue={column.setFilterValue} />
     ),
     Cell: ({ cell }) => (
       <>{dayjs(cell.getValue()).format("dddd, MMMM D, YYYY")}</>
