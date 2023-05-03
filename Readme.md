@@ -2,7 +2,11 @@
 
 Standard CRUD Generator ReactJS with validation.
 
-![image info](./images/ss2.png)
+- Table
+  ![image info](./images/table.png)
+
+- Form Field
+  ![image info](./images/field.png)
 
 ### Usage
 
