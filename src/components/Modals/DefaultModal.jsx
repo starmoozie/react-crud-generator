@@ -41,7 +41,7 @@ export const DefaultModal = ({ columns, row }) => {
                   />
                 ) : (
                   <Typography
-                    variant="subtitle2"
+                    variant="body2"
                     gutterBottom
                     key={`${Math.random().toString(36).slice(2, 7)}`}
                   >

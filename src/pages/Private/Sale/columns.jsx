@@ -1,55 +1,15 @@
 import { rupiah } from "@util";
 import TooltipColumn from "@column/Tooltip";
-import DateFilter from "@filter/Date";
+import DateRangeFilter from "@filter/DateRange";
 import dayjs from "dayjs";
-import { useState } from "react";
-import { Box, Chip, Tooltip } from "@mui/material";
 
 export const columns = [
   {
     accessorKey: "date",
     header: "Date",
-    Filter: ({ column }) => {
-      const [filter, setFilter] = useState({
-        min: "",
-        max: "",
-      });
-
-      const handleChange = (data) => {
-        const value = data.value ? dayjs(data.value).format("YYYY-MM-DD") : "";
-        const filterDate = {
-          min: data.name === "min" ? value : filter.min,
-          max: data.name === "max" ? value : filter.max,
-        };
-        setFilter({ ...filter, ...filterDate });
-
-        if (filterDate.min && filterDate.max) {
-          column.setFilterValue(filterDate);
-        }
-        if (!filterDate.min && !filterDate.max) {
-          column.setFilterValue([]);
-        }
-      };
-
-      return (
-        <Box
-          sx={{ display: "grid", gridTemplateColumns: "6fr 6fr", gap: "1rem" }}
-        >
-          <DateFilter
-            maxDate={filter.maxDate}
-            name="min"
-            setFilterValue={(e) => handleChange(e)}
-            label={`Min Date`}
-          />
-          <DateFilter
-            minDate={filter.min}
-            name="max"
-            setFilterValue={(e) => handleChange(e)}
-            label={`Max Date`}
-          />
-        </Box>
-      );
-    },
+    Filter: ({ column }) => (
+      <DateRangeFilter setFilterValue={column.setFilterValue} />
+    ),
     Cell: ({ cell }) => (
       <>{dayjs(cell.getValue()).format("dddd, MMMM D, YYYY")}</>
     ),
@@ -116,7 +76,7 @@ export const columns = [
           ? "success"
           : "default";
 
-      const label =
+      const value =
         entry.refund_payabled || !parseInt(entry.refund) ? "No" : "Yes";
 
       const title =
@@ -126,11 +86,7 @@ export const columns = [
           rupiah(row.original.refund)
         );
 
-      return (
-        <Tooltip title={title}>
-          <Chip color={color} label={label} size="small" />
-        </Tooltip>
-      );
+      return <TooltipColumn title={title} value={value} color={color} />;
     },
   },
   {

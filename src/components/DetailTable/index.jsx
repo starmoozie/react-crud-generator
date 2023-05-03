@@ -14,6 +14,7 @@ export const DetailTable = ({ row, columns }) => (
     disableColumnSelector
     hideFooter
     density="compact"
+    autoHeight
   />
 );
 
