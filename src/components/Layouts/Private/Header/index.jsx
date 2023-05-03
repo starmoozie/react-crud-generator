@@ -30,9 +30,11 @@ const Header = () => {
       sx={{
         zIndex: (theme) => theme.zIndex.drawer + 1,
         borderRadius: 0,
-        boxShadow: "none",
+        filter: "none",
+        boxShadow: "0 12px 20px 6px rgb(104 112 118 / 0.08)",
         ":hover": {
-          boxShadow: "none",
+          filter: `none`,
+          boxShadow: "0 12px 20px 6px rgb(104 112 118 / 0.08)",
           transform: "none",
         },
       }}
@@ -49,7 +51,15 @@ const Header = () => {
         >
           <MenuIcon />
         </IconButton>
-        <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
+        <Typography
+          variant="h6"
+          noWrap
+          component="div"
+          sx={{
+            flexGrow: 1,
+            fontWeight: "bold",
+          }}
+        >
           {import.meta.env.VITE_APP_NAME}
         </Typography>
         <Stack spacing={2} direction="row">

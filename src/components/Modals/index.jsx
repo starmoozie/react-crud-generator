@@ -15,7 +15,19 @@ const Modal = ({
   return (
     <>
       {modal.showModal && (
-        <Dialog open={modal.showModal} fullWidth maxWidth={modal.size}>
+        <Dialog
+          open={modal.showModal}
+          fullWidth
+          maxWidth={modal.size}
+          sx={{
+            "& .MuiDialog-paper": {
+              ":hover": {
+                filter: `drop-shadow(0 12px 24px rgb(104 112 118 / 0.15)) drop-shadow(0 12px 14px rgb(104 112 118 / 0.1))`,
+                transform: "none",
+              },
+            },
+          }}
+        >
           <DialogTitle>{modal.action}</DialogTitle>
           <ModalType
             type={modal.type}

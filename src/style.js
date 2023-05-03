@@ -17,10 +17,13 @@ export const defaultTheme = (mode) => {
       MuiButton: {
         styleOverrides: {
           root: {
+            width: 130,
             textTransform: "capitalize",
             borderRadius: 20,
             "&:hover": {
-              boxShadow: isLight ? "0 2px 8px 0 #7e868c" : "none",
+              boxShadow: isLight
+                ? "0 2px 8px 0 #7e868c"
+                : "0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12)",
               transform: "translateY(-1px)",
             },
           },
@@ -32,9 +35,11 @@ export const defaultTheme = (mode) => {
             textTransform: "capitalize",
             borderRadius: 20,
             "&:hover": {
-              boxShadow: isLight ? "0 2px 4px 0 #7e868c" : "none",
+              boxShadow: isLight
+                ? "0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12)"
+                : "none",
               transform: "translateY(-1px)",
-              backgroundColor: isLight ? "#FFF" : "none",
+              backgroundColor: isLight ? "#F8F8F9" : "none",
             },
           },
         },
@@ -51,15 +56,17 @@ export const defaultTheme = (mode) => {
           root: {
             "&.Mui-selected": {
               "&:hover": {
-                backgroundColor: isLight ? "#FFF" : "#none",
+                backgroundColor: isLight
+                  ? "#F8F8F9"
+                  : "rgba(255, 255, 255, 0.08)",
               },
-              backgroundColor: isLight ? "#FFF" : "#none",
-              boxShadow: "0 2px 24px rgb(104 112 118 / 0.15)",
+              backgroundColor: isLight ? "#FFF" : "rgba(255, 255, 255, 0.10)",
+              boxShadow: "rgba(0, 0, 0, 0.25) 0px 2px 10px",
             },
             "&:hover": {
               borderRadius: 50,
-              boxShadow: "0 8px 12px rgb(104 112 118 / 0.15)",
-              backgroundColor: isLight ? "#FFF" : "#none",
+              boxShadow: isLight ? "0 2px 8px 0 #7e868c" : "none",
+              backgroundColor: isLight ? "#F8F8F9" : "#none",
               transform: "translateY(-1px)",
             },
             borderRadius: 50,
@@ -69,14 +76,16 @@ export const defaultTheme = (mode) => {
       MuiCard: {
         styleOverrides: {
           root: {
-            backgroundColor: isLight ? "#FFF" : "#121212",
-            borderRadius: 14,
-            boxShadow: isLight ? "0 12px 24px rgb(104 112 118 / 0.15)" : "none",
+            backgroundColor: isLight ? "#F8F8F9" : "#121212",
+            borderRadius: 20,
+            filter: isLight
+              ? `drop-shadow(0 12px 24px rgb(104 112 118 / 0.15)) drop-shadow(0 12px 14px rgb(104 112 118 / 0.1))`
+              : "none",
             "&:hover": {
-              boxShadow: isLight
-                ? "0 22px 34px rgb(104 112 118 / 0.35)"
+              filter: isLight
+                ? `drop-shadow(0 25px 34px rgb(104 112 118 / 0.35))`
                 : "none",
-              transform: "translateY(-1px)",
+              transform: "translateY(-2px)",
             },
           },
         },
@@ -84,14 +93,31 @@ export const defaultTheme = (mode) => {
       MuiPaper: {
         styleOverrides: {
           root: {
-            backgroundColor: isLight ? "#FFF" : "#121212",
-            borderRadius: 14,
-            boxShadow: isLight ? "0 12px 24px rgb(104 112 118 / 0.15)" : "none",
+            backgroundColor: isLight ? "#F8F8F9" : "#1B1B1B",
+            borderRadius: 20,
+            filter: isLight
+              ? `drop-shadow(0 12px 24px rgb(104 112 118 / 0.15)) drop-shadow(0 12px 14px rgb(104 112 118 / 0.1))`
+              : `none`,
             "&:hover": {
-              boxShadow: isLight
-                ? "0 15px 26px rgb(104 112 118 / 0.20)"
-                : "none",
-              transform: "translateY(-1px)",
+              filter: isLight
+                ? `drop-shadow(0 25px 34px rgb(104 112 118 / 0.35))`
+                : `none`,
+              transform: "translateY(-2px)",
+            },
+          },
+        },
+      },
+      MuiDrawer: {
+        styleOverrides: {
+          root: {
+            "& .MuiDrawer-paper": {
+              borderRadius: 0,
+              ":hover": {
+                filter: isLight
+                  ? `drop-shadow(0 12px 24px rgb(104 112 118 / 0.15)) drop-shadow(0 12px 14px rgb(104 112 118 / 0.1))`
+                  : "none",
+                transform: "none",
+              },
             },
           },
         },
@@ -109,22 +135,20 @@ export const defaultTheme = (mode) => {
           },
         },
       },
-      MuiTableRow: {
-        styleOverrides: {
-          root: {
-            "&.MuiTableRow-hover:hover": {
-              boxShadow: "0 8px 12px rgb(104 112 118 / 0.15)",
-              transform: "translateY(-1px)",
-            },
-          },
-        },
-      },
       MuiCheckbox: {
         styleOverrides: {
           root: {
             "&:hover": {
               transform: "translateY(-1px)",
             },
+          },
+        },
+      },
+      MuiChip: {
+        styleOverrides: {
+          root: {
+            boxShadow:
+              "0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12)",
           },
         },
       },
