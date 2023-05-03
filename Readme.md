@@ -1,6 +1,6 @@
 ### ReactJS CRUD Generator
 
-![image info](./images/ss.png)
+![image info](./images/ss2.png)
 
 Standard CRUD Generator ReactJS with validation.
 
