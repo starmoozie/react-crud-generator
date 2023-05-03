@@ -41,7 +41,6 @@ npm run generate starmoozie:component {name}
 - Repeatable
 
 ```
-    import { RepeatableField } from "@field";
     {
         accessorKey: "items",
         header: "Items",
@@ -61,7 +60,7 @@ npm run generate starmoozie:component {name}
 - Select
 
 ```
-    import { CheckboxField } from "@field";
+    import { SelectField } from "@field";
     {
         accessorKey: "refund_payabled",
         header: "Pay Refund",
@@ -86,7 +85,7 @@ npm run generate starmoozie:component {name}
 - Text
 
 ```
-    import { CheckboxField } from "@field";
+    import { TextField } from "@field";
     {
         accessorKey: "refund_payabled",
         header: "Pay Refund",
