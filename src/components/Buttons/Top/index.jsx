@@ -9,11 +9,12 @@ const buttons = {
 const TopButton = ({ row, visibilityColumns, permission }) => {
   return (
     <>
-      {permission?.access.map((button) => {
+      {permission?.map((button) => {
         const Button = buttons[button.name];
 
         return (
           <Button
+            inputProps={button.inputProps}
             key={button.name.toLowerCase()}
             visibilityColumns={visibilityColumns}
             row={row}

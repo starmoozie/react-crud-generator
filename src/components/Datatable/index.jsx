@@ -23,6 +23,8 @@ const Datatable = ({
   createValidation,
   editValidation,
   BottomToolbar,
+  imports,
+  exports,
 }) => {
   const location = useLocation();
   const [cookies] = useCookies();
@@ -43,7 +45,13 @@ const Datatable = ({
     []
   );
   const topRightPermission = useMemo(
-    () => permissions.find((permission) => permission.position === TOP_RIGHT),
+    () =>
+      permissions
+        .find((permission) => permission.position === TOP_RIGHT)
+        ?.access.map((item) => ({
+          ...item,
+          inputProps: item.key === "import" ? imports : exports,
+        })),
     []
   );
   const linePermission = useMemo(
