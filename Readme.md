@@ -30,11 +30,11 @@ npm run generate starmoozie:component {name}
 - Date
 
 ```
-    import { CheckboxField } from "@field";
+    import { DateField } from "@field";
     {
         accessorKey: "refund_payabled",
         header: "Pay Refund",
-        Cell: (props) => <CheckboxField {...props} />,
+        Cell: (props) => <DateField {...props} defaultValue={new Date()} autoFocus={true} />,
     },
 ```
 
