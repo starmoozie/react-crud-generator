@@ -9,6 +9,7 @@ import * as Icon from "@icon";
 import { useEffect } from "react";
 import { setActivePrivateMenu } from "@reducer/sidebarReducer";
 import { useDispatch } from "react-redux";
+import { setMobileOpen } from "@reducer/sidebarReducer";
 
 const SingleItem = ({ item }) => {
   const location = useLocation();
@@ -19,6 +20,7 @@ const SingleItem = ({ item }) => {
 
   const handleClick = () => {
     navigate(item.path);
+    dispatch(setMobileOpen(false));
   };
 
   useEffect(() => {
