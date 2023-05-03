@@ -108,7 +108,11 @@ const Datatable = ({
       {/* Title component */}
       <Typography
         variant="h5"
-        sx={{ textTransform: "capitalize" }}
+        sx={{
+          textTransform: "capitalize",
+          fontWeight: "bold",
+          pb: 1,
+        }}
         gutterBottom
       >
         {pageName}
@@ -150,7 +154,6 @@ const Datatable = ({
           sorting,
           columnVisibility: visibilityColumns,
         }}
-        // enableColumnOrdering
         enableGlobalFilter={false}
         enableFullScreenToggle={false}
         enableDensityToggle={false}
@@ -158,7 +161,6 @@ const Datatable = ({
         positionToolbarAlertBanner="bottom"
         memoMode="cells"
         enableRowActions={linePermission ? true : false}
-        // positionActionsColumn="last"
         renderRowActionMenuItems={({ closeMenu, row }) => (
           <div>
             {linePermission ? (
@@ -189,15 +191,15 @@ const Datatable = ({
             <MRT_ShowHideColumnsButton table={table} />
           </Box>
         )}
-        muiTablePaperProps={
-          {
-            // elevation: 0,
-            // sx: { borderRadius: 20 },
-          }
-        }
+        muiTablePaperProps={{
+          elevation: 0,
+          sx: {
+            p: 2,
+          },
+        }}
         enableStickyHeader
         enableStickyFooter
-        muiTableContainerProps={{ sx: { maxHeight: 610 } }}
+        muiTableContainerProps={{ sx: { maxHeight: 580 } }}
         columnVisibility={visibilityColumns}
         onColumnVisibilityChange={setVisibilityColumns}
         renderBottomToolbarCustomActions={({ table }) =>
