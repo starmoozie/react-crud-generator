@@ -42,7 +42,9 @@ export const details = [
       xs: 12,
       md: 4,
     },
-    Cell: ({ row }) => <>{dayjs(row.date).format("dddd, MMMM D, YYYY")}</>,
+    Cell: ({ row }) => (
+      <TextColumn value={dayjs(row.date).format("dddd, MMMM D, YYYY")} />
+    ),
   },
   {
     accessorKey: "customer.name",
