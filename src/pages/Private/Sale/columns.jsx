@@ -2,7 +2,6 @@ import { rupiah } from "@util";
 import TooltipColumn from "@column/Tooltip";
 import DateRangeFilter from "@filter/DateRange";
 import dayjs from "dayjs";
-import { Chip, Tooltip } from "@mui/material";
 
 export const columns = [
   {
@@ -77,7 +76,7 @@ export const columns = [
           ? "success"
           : "default";
 
-      const label =
+      const value =
         entry.refund_payabled || !parseInt(entry.refund) ? "No" : "Yes";
 
       const title =
@@ -87,11 +86,7 @@ export const columns = [
           rupiah(row.original.refund)
         );
 
-      return (
-        <Tooltip title={title}>
-          <Chip color={color} label={label} size="small" />
-        </Tooltip>
-      );
+      return <TooltipColumn title={title} value={value} color={color} />;
     },
   },
   {
