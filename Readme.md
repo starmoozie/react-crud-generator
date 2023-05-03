@@ -304,7 +304,3 @@ npm run generate starmoozie:component {name}
 - Field validation [React Hook Form](https://react-hook-form.com/), [Yup](https://github.com/jquense/yup)
 - State management [Redux](https://redux.js.org/)
 - Datatable [Material React Table](https://www.material-react-table.com/)
-
-```
-
-```
