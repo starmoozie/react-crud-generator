@@ -127,6 +127,18 @@ npm run generate starmoozie:component {name}
     },
 ```
 
+- External Link
+
+```
+    import ExternalLinkColumn from "@column/ExternalLink";
+    Cell: ({ renderedCellValue }) => <ExternalLinkColumn
+        href={"https://wa.met/${renderedCellValue}"}
+        value={renderedCellValue}
+        target="_blank"
+    />,
+
+```
+
 #### Filters
 
 - Date

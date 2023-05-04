@@ -27,7 +27,7 @@ export const DefaultModal = ({ columns, row }) => {
                 <Typography
                   variant="caption"
                   display="block"
-                  sx={{ textTransform: "capitalize" }}
+                  sx={{ textTransform: "capitalize", fontWeight: "bold" }}
                   gutterBottom
                   key={`${Math.random().toString(36).slice(2, 7)}`}
                 >
