@@ -3,6 +3,7 @@ import TextField from "@field/Text";
 import * as yup from "yup";
 import Chip from "@mui/material/Chip";
 import { rupiah } from "@util";
+import ExternalLinkColumn from "@column/ExternalLink";
 
 const columns = [
   {
@@ -12,6 +13,24 @@ const columns = [
   {
     accessorKey: "phone",
     header: "Phone",
+    Cell: ({ renderedCellValue }) => {
+      const href = renderedCellValue
+        ? `https://wa.me/${renderedCellValue}`
+        : "#";
+      return (
+        <>
+          {renderedCellValue ? (
+            <ExternalLinkColumn
+              href={href}
+              value={renderedCellValue}
+              target="_blank"
+            />
+          ) : (
+            <></>
+          )}
+        </>
+      );
+    },
   },
   {
     accessorKey: "product",
@@ -35,6 +54,19 @@ const details = [
   {
     accessorKey: "phone",
     header: "Phone",
+    Cell: ({ row, field }) => {
+      const value = row[field.accessorKey];
+      const href = value ? `https://wa.me/${value}` : "#";
+      return (
+        <>
+          {value ? (
+            <ExternalLinkColumn href={href} value={value} target="_blank" />
+          ) : (
+            <></>
+          )}
+        </>
+      );
+    },
   },
   {
     accessorKey: "product",
