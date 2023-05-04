@@ -1,4 +1,5 @@
 import { rupiah } from "@util";
+import TextColumn from "@column/Text";
 
 export const details = [
   {
@@ -32,6 +33,8 @@ export const details = [
       xs: 12,
       md: 6,
     },
-    Cell: ({ row, field }) => <>{rupiah(row[field.accessorKey])}</>,
+    Cell: ({ row, field }) => (
+      <TextColumn value={rupiah(row[field.accessorKey])} />
+    ),
   },
 ];

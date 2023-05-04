@@ -43,7 +43,7 @@ export const details = [
     accessorKey: "date",
     header: "Date",
     attributes: {
-      xs: 12,
+      xs: 6,
       md: 4,
     },
     Cell: ({ row }) => (
@@ -54,7 +54,7 @@ export const details = [
     accessorKey: "customer.name",
     header: "Customer",
     attributes: {
-      xs: 12,
+      xs: 6,
       md: 4,
     },
   },
@@ -62,7 +62,7 @@ export const details = [
     accessorKey: "totalAmount",
     header: "Total Amount",
     attributes: {
-      xs: 12,
+      xs: 6,
       md: 4,
     },
     Cell: ({ row }) => <TextColumn value={rupiah(row.totalAmount)} />,
@@ -71,23 +71,44 @@ export const details = [
     accessorKey: "alreadyPaid",
     header: "Already Paid",
     attributes: {
-      xs: 12,
+      xs: 6,
       md: 4,
     },
-    Cell: ({ row }) => (
-      <>
-        <TextColumn value={`Checkout: ${rupiah(row.checkout_amount)}`} />
-        <TextColumn
-          value={`${row.paymentMethod.name}: ${rupiah(row.pay_amount)}`}
-        />
-      </>
-    ),
+    Cell: ({ row }) => {
+      const data = [
+        {
+          label: "Checkout",
+          value: rupiah(row.checkout_amount),
+        },
+        {
+          label: row.paymentMethod.name,
+          value: rupiah(row.pay_amount),
+        },
+      ];
+
+      return (
+        <ul style={{ marginLeft: -65, marginTop: -5, marginBottom: -5 }}>
+          {data.map((item) => (
+            <ul>
+              <li>
+                <TextColumn value={item.label} />
+                <ul>
+                  <li>
+                    <TextColumn value={item.value} />
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          ))}
+        </ul>
+      );
+    },
   },
   {
     accessorKey: "not_paid",
     header: "Unpaid",
     attributes: {
-      xs: 12,
+      xs: 6,
       md: 4,
     },
     Cell: ({ row }) => <TextColumn value={rupiah(row.unpaid)} />,
@@ -96,7 +117,7 @@ export const details = [
     accessorKey: "refund",
     header: "Refund",
     attributes: {
-      xs: 12,
+      xs: 6,
       md: 4,
     },
     Cell: ({ row }) => <TextColumn value={rupiah(row.refund)} />,
@@ -105,7 +126,7 @@ export const details = [
     accessorKey: "brutto",
     header: "Brutto",
     attributes: {
-      xs: 12,
+      xs: 6,
       md: 4,
     },
     Cell: ({ row }) => <TextColumn value={rupiah(row.brutto)} />,
@@ -114,7 +135,7 @@ export const details = [
     accessorKey: "netto",
     header: "Netto",
     attributes: {
-      xs: 12,
+      xs: 6,
       md: 4,
     },
     Cell: ({ row }) => <TextColumn value={rupiah(row.netto)} />,
@@ -123,7 +144,7 @@ export const details = [
     accessorKey: "receipt_number",
     header: "Receipt Number",
     attributes: {
-      xs: 12,
+      xs: 6,
       md: 4,
     },
   },
