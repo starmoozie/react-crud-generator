@@ -120,15 +120,6 @@ const Login = (props) => {
         </Button>
         <Grid container>
           <Grid item xs>
-            {FORGOT_PASSWORD ? (
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
-            ) : (
-              <></>
-            )}
-          </Grid>
-          <Grid item>
             {REGISTER ? (
               <>
                 <Typography variant="body2">
@@ -138,6 +129,15 @@ const Login = (props) => {
                   </Link>
                 </Typography>
               </>
+            ) : (
+              <></>
+            )}
+          </Grid>
+          <Grid item>
+            {FORGOT_PASSWORD ? (
+              <Link href="#" variant="body2">
+                Forgot password?
+              </Link>
             ) : (
               <></>
             )}
