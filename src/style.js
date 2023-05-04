@@ -17,7 +17,7 @@ export const defaultTheme = (mode) => {
       MuiButton: {
         styleOverrides: {
           root: {
-            width: 130,
+            minWidth: 130,
             textTransform: "capitalize",
             borderRadius: 20,
             "&:hover": {
